@@ -1,6 +1,6 @@
+#include <algorithm>
 #include <iostream>
 #include <vector>
-#include <algorithm>
 
 using namespace std;
 
@@ -22,7 +22,7 @@ class Solution {
             // used[i-1] == false表示同一树层cand[i-1]使用过
 
             // 对同一树层使用过的元素跳过
-            if (i > 0 && cand[i] == cand[i-1] && used[i-1] == false){
+            if (i > 0 && cand[i] == cand[i - 1] && used[i - 1] == false) {
                 continue;
             }
             sum += cand[i];
@@ -44,9 +44,24 @@ class Solution {
         result.clear();
         path.clear();
 
-        sort(candidates.begin(), candidates.end()); // 得排序，让相同元素相邻
+        sort(candidates.begin(), candidates.end());  // 得排序，让相同元素相邻
         backtracking(candidates, target, 0, 0, used);
 
         return result;
     }
 };
+
+int main() {
+    vector<int> cand = {10, 1, 2, 7, 6, 1, 5};
+    int target = 8;
+
+    Solution s;
+    vector<vector<int>> result;
+    result = s.combinationSum2(cand, target);
+    for (auto& res : result) {
+        for (int i = 0; i < res.size(); i++) {
+            cout << res[i] << " ";
+        }
+        cout << endl;
+    }
+}
