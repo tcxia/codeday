@@ -21,6 +21,19 @@ class Solution {
         }
     }
 
+    void backtrackingv2(vector<int>& nums, int startIndex) {
+        result.push_back(path);
+        if (startIndex >= nums.size()) {
+            return;
+        }
+
+        for (int i = startIndex; i < nums.size(); i++) {
+            path.push_back(nums[i]);
+            backtrackingv2(nums, i + 1);
+            path.pop_back();
+        }
+    }
+
    public:
     vector<vector<int>> subsets(vector<int>& nums) {
         result.clear();
