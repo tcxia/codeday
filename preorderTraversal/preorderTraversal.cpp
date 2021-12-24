@@ -25,6 +25,7 @@ class Solution {
     }
 
    public:
+   // 递归遍历
     vector<int> result;
     vector<int> preorderTraversal(TreeNode *root) {
         if (!root) {
