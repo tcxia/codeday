@@ -1,5 +1,7 @@
 #include <iostream>
+#include <stack>
 #include <vector>
+
 using namespace std;
 
 struct TreeNode {
@@ -13,6 +15,7 @@ struct TreeNode {
 
 class Solution {
    public:
+    // 构建二叉树
     TreeNode *createTree() {
         TreeNode *root = NULL;
         TreeNode *node1 = new TreeNode(1);
@@ -25,7 +28,7 @@ class Solution {
     }
 
    public:
-   // 递归遍历
+    // 递归遍历
     vector<int> result;
     vector<int> preorderTraversal(TreeNode *root) {
         if (!root) {
@@ -37,12 +40,29 @@ class Solution {
         }
         return result;
     }
+
+    // 迭代遍历
+    vector<int> preorderTraversalv2(TreeNode *root) {
+        stack<TreeNode *> st;
+        vector<int> result;
+        if (root == NULL) return result;
+        st.push(root);
+        while (!st.empty()) {
+            TreeNode *node = st.top();  // 返回栈顶元素，但不删除元素
+            st.pop();                   // 删除栈顶元素但不返回其值
+            // cout << node->val << endl;
+            result.push_back(node->val);
+            if (node->right) st.push(node->right);  // 在栈顶压入新元素
+            if (node->left) st.push(node->left);
+        }
+        return result;
+    }
 };
 
 int main() {
     Solution solve;
     TreeNode *root = solve.createTree();
-    vector<int> result = solve.preorderTraversal(root);
+    vector<int> result = solve.preorderTraversalv2(root);
     for (auto &res : result) {
         cout << res << endl;
     }
