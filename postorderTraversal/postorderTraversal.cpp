@@ -1,3 +1,4 @@
+#include <algorithm>
 #include <iostream>
 #include <stack>
 #include <vector>
@@ -30,18 +31,15 @@ class Solution {
     vector<int> postorderTraversalv2(TreeNode *root) {
         stack<TreeNode *> st;
         if (root == NULL) return result;
-        TreeNode* cur = root; // 设定指针
-        if(!st.empty() || cur != NULL){
-            if (cur != NULL){
-                st.push(cur);
-                cur = cur->left;
-            }else{
-                cur = st.top(); // 返回栈顶元素但是不是删除
-                st.pop(); // 删除栈顶元素
-                result.push_back(cur->val);
-                cur = cur->right;
-            }
+        st.push(root);
+        while (!st.empty()) {
+            TreeNode *node = st.top();
+            st.pop();
+            result.push_back(node->val);
+            if (node->left) st.push(node->left);
+            if (node->right) st.push(node->right);
         }
+        reverse(result.begin(), result.end());
         return result;
     }
 };

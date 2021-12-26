@@ -1,5 +1,7 @@
 #include <iostream>
+#include <stack>
 #include <vector>
+
 using namespace std;
 
 struct TreeNode {
@@ -20,6 +22,24 @@ class Solution {
             inorderTraversal(root->left);
             result.push_back(root->val);
             inorderTraversal(root->right);
+        }
+        return result;
+    }
+
+    vector<int> inorderTraversalv2(TreeNode *root) {
+        stack<TreeNode *> st;
+        TreeNode *cur = root;
+        if (root == NULL) return result;
+        while (cur != NULL || !st.empty()) {
+            if (cur != NULL) { // 指针来访问节点，访问到最底层
+                st.push(cur); // 将访问的节点放进栈
+                cur = cur->left;
+            } else {
+                cur = st.top(); // 从栈里弹出的数据，就是要处理的数据
+                st.pop();
+                result.push_back(cur->val);
+                cur = cur->left;
+            }
         }
         return result;
     }
