@@ -11,5 +11,6 @@ struct TreeNode {
 class Solution {
    public:
     int countNodes(TreeNode *root) {
+        int count;
     }
 };
