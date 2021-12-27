@@ -1,4 +1,5 @@
-#include<vector>
+#include <vector>
+#include <queue>
 using namespace std;
 
 struct TreeNode {
@@ -11,7 +12,23 @@ struct TreeNode {
 };
 
 class Solution {
+    vector<int> result;
    public:
     vector<int> rightSideView(TreeNode *root) {
+        queue<TreeNode*> que;
+        if(root != NULL) que.push(root);
+        while(!que.empty()){
+            int size = que.size();
+            vector<int> temp;
+            for(int i = 0; i < size; i++){
+                TreeNode* node = que.front();
+                que.pop();
+                temp.push_back(node->val);
+                if(node->left) que.push(node->left);
+                if(node->right) que.push(node->right);
+            }
+            result.push_back(temp.back());
+        }
+        return result;
     }
 };
