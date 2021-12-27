@@ -23,7 +23,6 @@ class Solution {
     Node* connect(Node* root) {
         queue<Node*> que;
         if (root != NULL) que.push(root);
-        root->next = NULL;
         while (!que.empty()) {
             int size = que.size();
             for (int i = 0; i < size; i++) {
