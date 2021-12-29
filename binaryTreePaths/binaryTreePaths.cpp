@@ -1,6 +1,6 @@
 #include <iostream>
-#include <vector>
 #include <queue>
+#include <vector>
 using namespace std;
 
 struct TreeNode {
@@ -14,21 +14,26 @@ struct TreeNode {
 
 class Solution {
     vector<string> result;
+
    public:
     vector<string> binaryTreePaths(TreeNode *root) {
-        queue<TreeNode*> que;
-        if(root != nullptr) que.push(root);
-        while(!que.empty()){
-            int size = que.size();
-            string path;
-            for(int i = 0; i < size; i++){
-                TreeNode* node = que.front();
-                que.pop();
-                path += to_string(node->val) + "->";
-                if((node->left == nullptr) && (node->right == nullptr)){
-                    result.push_back(path);
-                }
-            }
-        }
+        
     }
 };
+
+int main() {
+    TreeNode *p1 = new TreeNode(1);
+    TreeNode *p2 = new TreeNode(2);
+    TreeNode *p3 = new TreeNode(3);
+    TreeNode *p5 = new TreeNode(5);
+    p1->left = p2;
+    p1->right = p3;
+    p2->right = p5;
+    TreeNode *root = p1;
+    Solution solve;
+    vector<string> result;
+    result = solve.binaryTreePaths(root);
+    for (auto &res : result) {
+        cout << res << endl;
+    }
+}
