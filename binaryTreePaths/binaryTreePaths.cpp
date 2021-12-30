@@ -1,5 +1,5 @@
 #include <iostream>
-#include <queue>
+#include <stack>
 #include <vector>
 using namespace std;
 
@@ -13,11 +13,66 @@ struct TreeNode {
 };
 
 class Solution {
-    vector<string> result;
+    void travesal(TreeNode *cur, vector<int> &path, vector<string> &result) {
+        path.push_back(cur->val);
+        if (cur->left == nullptr && cur->right == nullptr) {
+            string sPath;
+            for (int i = 0; i < path.size() - 1; i++) {
+                sPath += to_string(path[i]);
+                sPath += "->";
+            }
+            sPath += to_string(path[path.size() - 1]);
+            result.push_back(sPath);
+            return;
+        }
+
+        if (cur->left) {
+            travesal(cur->left, path, result);
+            path.pop_back();  // 回溯
+        }
+
+        if (cur->right) {
+            travesal(cur->right, path, result);
+            path.pop_back();  // 回溯
+        }
+    }
 
    public:
     vector<string> binaryTreePaths(TreeNode *root) {
-        
+        vector<string> result;
+        vector<int> path;
+        if (root == nullptr) return result;
+        travesal(root, path, result);
+        return result;
+    }
+
+    vector<string> binaryTreePathsv2(TreeNode *root) {
+        stack<TreeNode *> treeSt;
+        stack<string> pathSt;
+        vector<string> result;
+        if (root == nullptr) return result;
+        treeSt.push(root);
+        pathSt.push(to_string(root->val));
+        while (!treeSt.empty()) {
+            TreeNode *node = treeSt.top();
+            treeSt.pop();
+            string path = pathSt.top();
+            pathSt.pop();
+            if (node->left == nullptr && node->right == nullptr) {
+                result.push_back(path);
+            }
+
+            if (node->left) {
+                treeSt.push(node->left);
+                pathSt.push(path + "->" + to_string(node->left->val));
+            }
+
+            if (node->right) {
+                treeSt.push(node->right);
+                pathSt.push(path + "->" + to_string(node->right->val));
+            }
+        }
+        return result;
     }
 };
 

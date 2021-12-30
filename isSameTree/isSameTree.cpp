@@ -9,12 +9,23 @@ struct TreeNode {
 };
 
 class Solution {
+    bool compare(TreeNode *tree1, TreeNode *tree2) {
+        if (tree1 == nullptr && tree2 == nullptr)
+            return true;
+        else if (tree1 == nullptr && tree2 != nullptr)
+            return false;
+        else if (tree1 != nullptr && tree2 == nullptr)
+            return false;
+        else if (tree1->val != tree2->val)
+            return false;
+
+        bool compareLeft = compare(tree1->left, tree2->right);
+        bool compareRight = compare(tree1->right, tree2->right);
+        return compareLeft && compareRight;
+    }
+
    public:
     bool isSameTree(TreeNode *p, TreeNode *q) {
-        if(p != q) return false;
-        if (isSameTree(p->left, q->left) && isSameTree(p->right, q->right)){
-            return true;
-        }
-        return true;
+        return compare(p, q);
     }
 };
