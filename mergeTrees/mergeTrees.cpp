@@ -11,9 +11,9 @@ class Solution {
 
         tree1->val += tree2->val;
 
-        mergeOnce(tree1->left, tree2->left);
+        tree1->left = mergeOnce(tree1->left, tree2->left);
 
-        mergeOnce(tree1->right, tree2->right);
+        tree1->right = mergeOnce(tree1->right, tree2->right);
 
         return tree1;
     }
