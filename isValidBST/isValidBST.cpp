@@ -1,25 +1,22 @@
 #include "../common/binaryTree.h"
 
 class Solution {
-    bool compare(TreeNode* cur){
-        bool retLeft;
-        if(cur->left){
-            if(cur->left->val < cur->val){
-                return true;
-            }else{
-                return false;
-            }
-        }
-        if(cur->right){
-            if(cur->right->val > cur->val){
-                return true;
-            }else{
-                return false;
-            }
-        }
+    // 重点转化成中序遍历是否是一个有序数组
+    vector<int> vec;
+    void traversal(TreeNode* root) {
+        if (root == nullptr) return;
+        traversal(root->left);
+        vec.push_back(root->val);
+        traversal(root->right);
     }
+
    public:
     bool isValidBST(TreeNode* root) {
-        
+        vec.clear();
+        traversal(root);
+        for (int i = 1; i < vec.size(); i++) {
+            if (vec[i] <= vec[i - 1]) return false;
+        }
+        return true;
     }
 };
