@@ -5,26 +5,38 @@ using namespace std;
 class Solution {
    public:
     char slowestKey(vector<int>& releaseTimes, string keysPressed) {
-        int mulValue = releaseTimes[0];
-        int mulIndex = INT32_MIN;
-        int retIndex = 0;
+        vector<int> subvec;
+        int subvalue = INT32_MIN;
+        int keyindex = INT32_MIN;
+        int retindex = 0;
+        vector<int> subindex;
+        subvec.push_back(releaseTimes[0]);
         for (int i = 1; i < releaseTimes.size(); i++) {
-            int spendTime = releaseTimes[i] - releaseTimes[i - 1];
-            if (spendTime >= mulValue) {
-                mulValue = spendTime;
-                if ((keysPressed[i] - '0') >= mulIndex) {
-                    mulIndex = keysPressed[i] - '0';
-                    retIndex = i;
-                }
+            subvec.push_back(releaseTimes[i] - releaseTimes[i - 1]);
+        }
+        for (int i = 0; i < subvec.size(); i++) {
+            if (subvec[i] >= subvalue) {
+                subvalue = subvec[i];
             }
         }
-        return keysPressed[retIndex];
+        for (int i = 0; i < subvec.size(); i++) {
+            if (subvec[i] == subvalue) {
+                subindex.push_back(i);
+            }
+        }
+        for (int i = 0; i < subindex.size(); i++) {
+            if (keysPressed[subindex[i]] - '0' > keyindex) {
+                keyindex = keysPressed[subindex[i]] - '0';
+                retindex = subindex[i];
+            }
+        }
+        return keysPressed[retindex];
     }
 };
 
 int main() {
-    vector<int> rt = {9, 29, 49, 50};
-    string kp = "ccbd";
+    vector<int> rt = {12, 23, 36, 46, 62};
+    string kp = "spuda";
     Solution solve;
     char ret = solve.slowestKey(rt, kp);
     cout << ret << endl;
