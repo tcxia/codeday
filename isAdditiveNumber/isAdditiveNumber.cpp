@@ -4,6 +4,6 @@ using namespace std;
 class Solution {
 public:
     bool isAdditiveNumber(string num) {
-
+        
     }
 };
