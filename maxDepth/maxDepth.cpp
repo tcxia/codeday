@@ -29,7 +29,10 @@ class Solution {
     int maxDepthv2(TreeNode *root) {
         if (root == nullptr) return 0;
         // if (root->left == nullptr && root->right == nullptr) return 1;
-        int depth = max(maxDepthv2(root->left), maxDepthv2(root->right)) + 1;
+        int left = maxDepthv2(root->left);
+        int right = maxDepthv2(root->right);
+
+        int depth = max(left, right) + 1;
         return depth;
     }
 };
