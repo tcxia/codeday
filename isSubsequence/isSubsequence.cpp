@@ -24,4 +24,17 @@ class Solution {
         if (dp[s.size()][t.size()] == s.size()) return true;
         return true;
     }
+
+    bool isSubsequencev2(string s, string t) {
+        int ls = 0;
+        int lt = 0;
+        while (ls < s.size() && lt < t.size()) {
+            if (s[ls] == t[lt]) ls++;
+            lt++;
+        }
+        if (ls == s.size())
+            return true;
+        else
+            return false;
+    }
 };
