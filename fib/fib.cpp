@@ -23,7 +23,7 @@ class Solution {
     }
 
     int fibv3(int n) {
-        int dp[2];
+        int dp[2]; // 只有两个元素
         dp[0] = 0;
         dp[1] = 1;
         for (int i = 2; i <= n; i++) {

@@ -1,4 +1,6 @@
 #include <vector>
+#include <iostream>
+
 using namespace std;
 class Solution {
    public:
@@ -23,3 +25,10 @@ class Solution {
         return dp[m - 1][n - 1];
     }
 };
+
+int main() {
+    vector<vector<int>> obstacleGrid = {{0, 0, 0}, {0, 1, 0}, {0, 0, 0}};
+    Solution solve;
+    int ret = solve.uniquePathsWithObstacles(obstacleGrid);
+    cout << ret << endl;
+}

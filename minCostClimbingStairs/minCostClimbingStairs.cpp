@@ -2,6 +2,14 @@
 #include <vector>
 using namespace std;
 
+/** 
+ * dp[i] 表示到i-1层需要花费的cost
+ * dp[i] = min(dp[i-1], dp[i-2]) + cost[i];
+ * 
+ * 返回值 dp[cost.size()-1][cost.size()-2]
+ * 
+*/
+
 class Solution {
    public:
     int minCostClimbingStairs(vector<int>& cost) {
