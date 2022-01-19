@@ -3,15 +3,6 @@
 
 #include "../common/binaryTree.h"
 using namespace std;
-// struct TreeNode {
-//     int val;
-//     TreeNode* left;
-//     TreeNode* right;
-//     TreeNode() : val(0), left(nullptr), right(nullptr) {}
-//     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
-//     TreeNode(int x, TreeNode* left, TreeNode* right) : val(x), left(left), right(right) {}
-// };
-
 class Solution {
     void backtracking(TreeNode* cur, vector<int>& path, vector<vector<int>>& result) {
         path.push_back(cur->val);
@@ -26,6 +17,24 @@ class Solution {
             backtracking(cur->right, path, result);
             path.pop_back();
         }
+    }
+
+    bool traversal(TreeNode* cur, int count) {
+        if (cur->left == nullptr && cur->right == nullptr && count == 0) return true;
+        if (cur->left == nullptr && cur->right == nullptr) return false;
+
+        if (cur->left) {
+            count -= cur->left->val;
+            if (traversal(cur->left, count)) return true;
+            count += cur->left->val;
+        }
+
+        if (cur->right) {
+            count -= cur->right->val;
+            if (traversal(cur->right, count)) return true;
+            count += cur->right->val;
+        }
+        return false;
     }
 
    public:
@@ -45,6 +54,12 @@ class Solution {
             }
         }
         return false;
+    }
+
+    bool hasPathSumv2(TreeNode* root, int targetSum) {
+        // if(cur)
+        if (root == nullptr) return false;
+        return traversal(root, targetSum - root->val);
     }
 };
 
