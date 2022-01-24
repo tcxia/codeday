@@ -13,12 +13,14 @@ class Solution {
             }
         }
 
+        // 检查45度角是否有皇后
         for (int i = row - 1, j = col - 1; i >= 0 && j >= 0; i--, j--) {
             if (chessboard[i][j] == 'Q') {
                 return false;
             }
         }
 
+        // 检查135度角是否有皇后
         for (int i = row - 1, j = col + 1; i >= 0 && j < n; i--, j++) {
             if (chessboard[i][j] == 'Q') {
                 return false;
@@ -34,10 +36,10 @@ class Solution {
         }
 
         for (int col = 0; col < n; col++) {
-            if (isValid(row, col, chessboard, n)){
-                chessboard[row][col] == 'Q';
+            if (isValid(row, col, chessboard, n)){ // 验证合法就可以放置
+                chessboard[row][col] == 'Q'; // 放置
                 backtracking(n, row + 1, chessboard);
-                chessboard[row][col] = '.';
+                chessboard[row][col] = '.'; // 回溯
             }
         }
     }
