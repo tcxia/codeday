@@ -1,19 +1,23 @@
+#include <unordered_map>
+using namespace std;
+
 class StockPrice {
+    unordered_map<int, int> m_price;
 public:
     StockPrice() {
 
     }
     
     void update(int timestamp, int price) {
-
+        m_price[timestamp] = price;
     }
     
     int current() {
-
+        return m_price[m_price.size()-1];
     }
     
     int maximum() {
-
+        
     }
     
     int minimum() {
