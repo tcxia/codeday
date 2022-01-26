@@ -37,7 +37,7 @@ class Solution {
 
         for (int col = 0; col < n; col++) {
             if (isValid(row, col, chessboard, n)){ // 验证合法就可以放置
-                chessboard[row][col] == 'Q'; // 放置
+                chessboard[row][col] = 'Q'; // 放置
                 backtracking(n, row + 1, chessboard);
                 chessboard[row][col] = '.'; // 回溯
             }
@@ -47,7 +47,7 @@ class Solution {
    public:
     vector<vector<string>> solveNQueens(int n) {
         result.clear();
-        vector<string> chessboard(n, string(n, '.'));
+        vector<string> chessboard(n, string(n, '.')); // 初始化 N x N的矩阵
         backtracking(n, 0, chessboard);
         return result;
     }
