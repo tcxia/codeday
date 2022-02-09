@@ -17,7 +17,7 @@ public:
             });
 
             bool hasNext = false;
-            for(auto & [freq, ch] : arr){
+            for(auto& [freq, ch] : arr){
                 int m = res.size();
                 if (freq <= 0){
                     break;
