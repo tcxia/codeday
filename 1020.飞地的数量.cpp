@@ -17,9 +17,9 @@ public:
     // 深度优先遍历
     vector<vector<int>> dirs = {{-1, 0}, {1, 0}, {0, -1}, {0, 1}};
     int numEnclaves(vector<vector<int>>& grid) {
-        this->m = grid.size();
-        this->n = grid[0].size();
-        this->visited = vector<vector<bool>>(m, vector<bool>(n, false));
+        this->m = grid.size(); // 行数初始化
+        this->n = grid[0].size(); // 列数初始化
+        this->visited = vector<vector<bool>>(m, vector<bool>(n, false)); // 是否访问标签初始化
 
         for(int i = 0; i < m; i++){
             dfs(grid, i, 0);
@@ -43,7 +43,7 @@ public:
     }
 
     void dfs(const vector<vector<int>>&grid, int row, int col){
-        if(row < 0 || row >= m || col < n || col >= n || grid[row][col]==0 || visited[row][col]){
+        if(row < 0 || row >= m || col < 0 || col >= n || grid[row][col]==0 || visited[row][col]){
             return;
         }
         visited[row][col] = true;
