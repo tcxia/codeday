@@ -9,6 +9,7 @@
 #include <iostream>
 #include <vector>
 #include <unordered_map>
+#include <algorithm>
 
 using namespace std;
 
@@ -19,7 +20,7 @@ class Solution {
 public:
     vector<char> result;
     unordered_map<int, int> map;
-    int count = 0;
+    int count = INT32_MAX;
     int maxNumberOfBalloons(string text) {
         for(int i = 0; i < text.size(); i++){
             if(text[i] == 'b' || text[i] == 'a' || text[i] == 'l' || text[i] == 'o' || text[i] == 'n'){
@@ -32,19 +33,32 @@ public:
 
         for(int i = 0; i < result.size(); i++){
             map[result[i]]++;
-        }
-        
-        while (map['b'] == 1 && map['a'] == 1 && map['l'] == 2 && map['o'] == 2 && map['n'] == 1){
-            count++;
-            map['b']--;
-            map['a']--;
-            map['l'] = map['l'] - 2;
-            map['o'] = map['o'] - 2;
-            map['n']--;
+            // cout << result[i] << endl;
         }
 
+        // if (map['l'] == map['o'] && map['l'] - map['b'] == 1 && map['b'] == map['a'] && map['a'] == map['n']){
+        //     count++;
+        // } 
+        map['l'] /= 2;
+        map['o'] /= 2;
+
+        // return *min_element(map.begin(), map.end());
+
+
+    //     for (auto iter = umap.begin(); iter != umap.end(); ++iter) {
+    //     cout << "<" << iter->first << ", " << iter->second << ">" << endl;
+    // }
+        for(auto iter = map.begin(); iter != map.end(); ++iter){
+            count = iter->second < count ? iter->second : count;
+        }
         return count;
     }
 };
 // @lc code=end
 
+int main(){
+    string text = "loonbalxballpoon";
+    Solution solve;
+    int ret = solve.maxNumberOfBalloons(text);
+    cout << ret << endl;
+}
