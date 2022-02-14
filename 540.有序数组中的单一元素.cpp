@@ -25,19 +25,16 @@ public:
     }
 
     int singleNonDuplicate(vector<int>& nums){
-        if(nums.size() == 1){
-            return nums[0];
-        }
-        int i = 0, j = 1;
-        while (j < nums.size() - 1){
-            if (nums[j] != nums[i]){
-                return nums[i];
+        int low = 0, high = nums.size() - 1;
+        while(low < high){
+            int mid = (high - low) / 2 + low;
+            if (nums[mid] == nums[mid ^ 1]){ // mid 左右个数为奇数和偶数来判断
+                low = mid + 1;
             }else{
-                j += 2;
-                i += 2;
+                high = mid;
             }
         }
-        return 0;
+        return nums[low];
     }
 };
 // @lc code=end
