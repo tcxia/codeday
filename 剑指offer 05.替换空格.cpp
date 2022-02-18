@@ -24,7 +24,7 @@ public:
         
         s.resize(newlen); //  重新初始化
 
-        while(pointold > 0){
+        while(pointold >= 0){ // 注意边界条件
             if (s[pointold] != ' '){
                 s[pointnew] = s[pointold];
             }else{
@@ -41,7 +41,7 @@ public:
 };
 
 int main(){
-    string a = "we are happy";
+    string a = " we are happy ";
     Solution solve;
     string ret = solve.replaceSpace(a);
     cout << ret << endl;
