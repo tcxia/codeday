@@ -28,7 +28,7 @@ class Solution {
         while(n-- && fast != nullptr){
             fast = fast->next;
         }
-        fast = fast->next;
+        fast = fast->next; // 需要让slow指向被删除节点的上一个节点
         while(fast){
             slow = slow->next;
             fast = fast->next;
