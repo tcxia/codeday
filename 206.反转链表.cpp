@@ -18,6 +18,7 @@ struct ListNode {
 
 class Solution {
    public:
+   // 双指针
     ListNode* reverseList(ListNode* head) {
         ListNode* temp;
         ListNode* cur = head;
@@ -29,6 +30,17 @@ class Solution {
             cur = temp;
         }
         return pre;
+    }
+
+    // 递归写法
+    ListNode* reverseListv2(ListNode* head){
+        return reverse(nullptr, head);
+    }
+
+    ListNode* reverse(ListNode* pre, ListNode* cur){
+        if (cur == nullptr) return pre;
+        ListNode* tmp = cur->next;
+        return reverse(cur, tmp);
     }
 };
 // @lc code=end
