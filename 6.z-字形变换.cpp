@@ -17,25 +17,33 @@ using namespace std;
 class Solution {
 public:
     string convert(string s, int numRows) {
-        vector<vector<string>> mat;
+        int n = s.length(), r = numRows;
+        if (r == 1 | r >= n){
+            return s;
+        }
 
-        int pos = 0;
-        while(pos < s.size()){
-            for(int i = 0; i < numRows; i++){
-                mat[pos][i] = s[pos];
-                pos++;
-            }
-            int flag = pos;
-            for(int j = numRows - 1; j >= 0; j--){
-                mat[pos--][j] = s[flag];
-                flag++;
-            }
-        }
-        for(int i = 0; i < mat.size(); i++){
-            for(int j = 0; j < mat[0].size(); j++){
-                cout << mat[i][j] << endl;
+        int t = r * 2 - 2;
+        int c = (n + t - 1) / t * (r - 1);
+
+        vector<string> mat(r, string(c, 0));
+        for(int i = 0, x = 0, y = 0; i < n; ++i){
+            mat[x][y] = s[i];
+            if (i % t < r - 1){
+                ++x;
+            }else{
+                --x;
+                ++y;
             }
         }
+        string ans;
+        for(auto &row : mat){
+            for(char ch : row){
+                if (ch){
+                    ans += ch;
+                }
+            }
+        }
+        return ans;
     }
 };
 // @lc code=end
