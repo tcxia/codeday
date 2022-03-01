@@ -13,7 +13,7 @@ using namespace std;
 
 class Solution {
 public:
-    string minWindow(string s, string t) {
+    string minWindowv2(string s, string t) {
         unordered_map<int, int> map;
         for(int i = 0; i < t.size(); i++){
             map[t[i]]++;
@@ -43,6 +43,42 @@ public:
             }
         }
         return result;
+    }
+
+
+    string minWindow(string s, string t){
+        unordered_map<char, int> need, window;
+        for(char c : t) need[c]++;
+
+        int left = 0, right = 0;
+        int valid = 0;
+        int len = INT32_MAX;
+        int start = 0;
+        while (right < s.size()){
+            char c = s[right++];
+            if (need.count(c)){
+                window[c]++;
+                if (window[c] == need[c]){
+                    valid++;
+                }
+            }
+
+            while (valid == need.size()){
+                if (right - left < len){
+                    start = left;
+                    len = right - left;
+                }
+
+                char d = s[left++];
+                if (need.count(d)){
+                    if (window[d] == need[d]){
+                        valid--;
+                    }
+                    window[d]--;
+                }
+            }
+        }
+        return len == INT32_MAX ? "" : s.substr(start, len);
     }
 };
 // @lc code=end
