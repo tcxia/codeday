@@ -19,12 +19,13 @@ struct TreeNode {
 };
 
 #include <vector>
+#include <stack>
 
 using namespace std;
 
 class Solution {
    public:
-    vector<int> inorderTraversal(TreeNode *root) {
+    vector<int> inorderTraversalv2(TreeNode *root) {
         vector<int> result;
         inorder(root, result);
         return result;
@@ -37,5 +38,25 @@ class Solution {
         res.push_back(root->val);
         inorder(root->right, res);
     }
+
+    vector<int> inorderTraversal(TreeNode* root){
+        vector<int> result;
+        stack<TreeNode*> st;
+        TreeNode* cur = root;
+        while (cur != nullptr || !st.empty()){
+            if (cur != nullptr){
+                st.push(cur);
+                cur = cur->left;
+            }else{
+                cur = st.top();
+                st.pop();
+                result.push_back(cur->val);
+                cur = cur->right;
+            }
+        }
+        return result;
+    }
+    
+
 };
 // @lc code=end
