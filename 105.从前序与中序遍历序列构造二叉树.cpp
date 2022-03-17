@@ -27,19 +27,23 @@ class Solution {
         int rootValue = preorder[preorderBegin];
         TreeNode* root = new TreeNode(rootValue);
 
-        if (preorderEnd - preorderBegin == 1) return root;
+        if (preorderEnd - preorderBegin == 1) return root; // 如果只有一个元素，直接返回root
 
-        int delimiterIndex;
+        int delimiterIndex; // 寻找分割点
         for (delimiterIndex = 0; delimiterIndex < inorder.size(); delimiterIndex++){
             if (inorder[delimiterIndex] == rootValue) break;
         }
 
-        int leftInorderBegin = inorderBegin;
+        // 切割中序数组
+        // 中序左区间 左闭右开 [leftInorderBegin, leftInorderEnd)
+        int leftInorderBegin = inorderBegin; 
         int leftInorderEnd = delimiterIndex;
 
+        // 中序右区间 左闭右开 [rightInorderBegin, rightInorderEnd)
         int rightInorderBegin = delimiterIndex + 1;
         int rightInorderEnd = inorderEnd;
 
+        // 切割前序数组
         int leftPreorderBegin = preorderBegin + 1;
         int leftPreorderEnd = preorderBegin + 1 + delimiterIndex - inorderBegin;
 
