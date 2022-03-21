@@ -17,6 +17,7 @@ struct TreeNode {
     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
 };
 
+#include <stack>
 #include <vector>
 using namespace std;
 
@@ -31,6 +32,26 @@ class Solution {
 
    public:
     vector<int> preorderTraversal(TreeNode *root) {
+        vector<int> result;
+        stack<TreeNode *> st;
+        if (root == nullptr) return result;
+        TreeNode* cur = root;
+        while (!st.empty() || cur != nullptr) {
+            while (cur != nullptr){
+                result.push_back(cur->val);
+                st.push(cur);
+                cur = cur->left;
+            }
+            cur = st.top();
+            st.pop();
+            cur = cur->right;
+        }
+        return result;
+    }
+
+
+
+    vector<int> preorderTraversalv2(TreeNode *root) {
         vector<int> result;
         traversal(root, result);
         return result;
