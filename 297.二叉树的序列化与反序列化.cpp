@@ -9,6 +9,7 @@
  * Definition for a binary tree node.
  */
 
+#include <cstring>
 #include <iostream>
 #include <list>
 using namespace std;
@@ -53,21 +54,21 @@ class Codec {
 
     // Decodes your encoded data to tree.
     TreeNode* deserialize(string data) {
-        list<string> data;
+        list<string> dataArr;
         string str;
         for (auto& ch : data) {
             if (ch == ',') {
-                data.push_back(str);
+                dataArr.push_back(str);
                 str.clear();
             } else {
                 str.push_back(ch);
             }
         }
         if (!str.empty()) {
-            data.push_back(str);
+            dataArr.push_back(str);
             str.clear();
         }
-        return rdeserialize(data);
+        return rdeserialize(dataArr);
     }
 };
 
