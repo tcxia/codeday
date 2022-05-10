@@ -33,7 +33,7 @@ class Solution {
     }
 
    public:
-    vector<int> diStringMatch(string s) {
+    vector<int> diStringMatchv1(string s) {
         int n = s.size();
 
         vector<int> temp;
@@ -44,12 +44,39 @@ class Solution {
         vector<bool> used(temp.size(), false);
         backtracking(temp, used);
 
+        for (int i = 0; i < result.size(); i++) {
+            string tmp = "";
+            for (int j = 1; j < result[i].size(); j++) {
+                if (result[i][j] > result[i][j - 1]) {
+                    tmp += "I";
+                } else {
+                    tmp += "D";
+                }
+            }
+            if (tmp == s) {
+                return result[i];
+            }
+        }
         return temp;
+    }
+
+    // 贪心策略
+    vector<int> diStringMatch(string s) {
+        int n = s.length(), lo = 0, hi = n;
+        vector<int> perm(n + 1);
+        for (int i = 0; i < n; i++) {
+            perm[i] = s[i] == 'I' ? lo++ : hi--;
+        }
+        perm[n] = lo;
+        return perm;
     }
 };
 // @lc code=end
 
 int main() {
     Solution solve;
-    solve.diStringMatch("IDID");
+    vector<int> ret = solve.diStringMatch("IDID");
+    for (int i = 0; i < ret.size(); i++) {
+        cout << ret[i] << endl;
+    }
 }
