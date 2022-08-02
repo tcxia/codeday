@@ -1,1 +1,3 @@
 # codeday
+
+study everyday
