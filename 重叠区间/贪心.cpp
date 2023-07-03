@@ -12,6 +12,8 @@
 */
 
 
+
+// 解决思路同『用最少数量的箭引爆气球』
 class Solution{
     public:
     static bool cmp(const vector<int>& a, const vector<int>& b){
