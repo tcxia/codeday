@@ -19,6 +19,8 @@ class Solution{
 
     int findMinArrowShots(vector<vector<int>>& points){
 
+        if (points.size() == 0) return 0;
+
         sort(points.begin(), points.end(), cmp); // 底层默认是快排
         
         int result = 1;
